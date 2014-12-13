@@ -11,9 +11,12 @@ cat f_2014.txt f_2013.txt > f_all_year.csv
 rm f_201*.*
 sed 's/CRUDE OIL\, LIGHT SWEET/CRUDE OIL LIGHT SWEET/' f_all_year.csv > f_sub.csv
 awk -F "," '{OFS=","};{print $1, $3, $8, $22, $23 }' f_sub.csv > f_col.csv
-sed -n '/CRUDE OIL LIGHT SWEET - NEW YORK MERCANTILE EXCHANGE/p' f_col.csv > cot.csv
+sed -n '/CRUDE OIL LIGHT SWEET - NEW YORK MERCANTILE EXCHANGE/p' f_col.csv > cot_oil.csv
+sed -n '/CORN - CHICAGO BOARD OF TRADE/p' f_col.csv > cot_corn.csv
+sed -n '/WHEAT - CHICAGO BOARD OF TRADE/p' f_col.csv > cot_wheat.csv
+sed -n '/SOYBEAN MEAL - CHICAGO BOARD OF TRADE/p' f_col.csv > cot_beans.csv
 rm f_*.csv
 cd ..
 mkdir -p reports
 MathKernel -noprompt -run "<<./cot.m"
-rm scratch/cot.csv
+rm scratch/cot_*.csv

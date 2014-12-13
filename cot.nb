@@ -1,0 +1,214 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      7376,        205]
+NotebookOptionsPosition[      7083,        190]
+NotebookOutlinePosition[      7438,        206]
+CellTagsIndexPosition[      7395,        203]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"commodities", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<oil\>\"", ",", "\"\<corn\>\"", ",", "\"\<wheat\>\"", ",", 
+     "\"\<beans\>\""}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"etfs", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "\"\<OIL\>\"", ",", "\"\<CORN\>\"", ",", "\"\<WEAT\>\"", ",", 
+     "\"\<SOYB\>\""}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.627489264130859*^9, 3.6274892809097643`*^9}, {
+  3.627489636134564*^9, 3.627489717129958*^9}}],
+
+Cell[BoxData[
+ RowBox[{"For", "[", 
+  RowBox[{
+   RowBox[{"i", "=", "1"}], ",", 
+   RowBox[{"i", "\[LessEqual]", "4"}], ",", 
+   RowBox[{"i", "++"}], ",", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"datafile", "=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"\"\</Users/padamson/Mathematica/cot/scratch/cot_\>\"", ",", 
+       RowBox[{"commodities", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\"\<.csv\>\""}], "]"}]}], ";", 
+    "\n", 
+    RowBox[{"data", "=", 
+     RowBox[{"Import", "[", 
+      RowBox[{"datafile", ",", 
+       RowBox[{"\"\<DateStringFormat\>\"", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<Year\>\"", ",", "\"\<-\>\"", ",", "\"\<Month\>\"", ",", 
+          "\"\<-\>\"", ",", "\"\<Day\>\""}], "}"}]}]}], "]"}]}], ";", "\n", 
+    RowBox[{"data2", "=", 
+     RowBox[{"Table", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"data", "[", 
+          RowBox[{"[", 
+           RowBox[{"i", ",", "2"}], "]"}], "]"}], ",", 
+         RowBox[{"100", "*", 
+          RowBox[{"N", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"data", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "4"}], "]"}], "]"}], "-", 
+              RowBox[{"data", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "5"}], "]"}], "]"}]}], ")"}], "/", 
+            RowBox[{"data", "[", 
+             RowBox[{"[", 
+              RowBox[{"i", ",", "3"}], "]"}], "]"}]}], "]"}]}]}], "}"}], ",", 
+       
+       RowBox[{"{", 
+        RowBox[{"i", ",", 
+         RowBox[{"Length", "[", "data", "]"}]}], "}"}]}], "]"}]}], ";", "\n", 
+    
+    RowBox[{"etfdata", "=", 
+     RowBox[{"FinancialData", "[", 
+      RowBox[{
+       RowBox[{"etfs", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", 
+       RowBox[{"data2", "[", 
+        RowBox[{"[", 
+         RowBox[{
+          RowBox[{"Length", "[", "data2", "]"}], ",", "1"}], "]"}], "]"}]}], 
+      "]"}]}], ";", "\n", 
+    RowBox[{"etfplot", "=", 
+     RowBox[{"DateListPlot", "[", 
+      RowBox[{"etfdata", ",", 
+       RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", "Blue"}], ",", 
+       RowBox[{"ImagePadding", "\[Rule]", "50"}], ",", 
+       RowBox[{"Frame", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"True", ",", "True", ",", "True", ",", "False"}], "}"}]}], 
+       ",", 
+       RowBox[{"FrameStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "Automatic", ",", "Blue", ",", "Automatic", ",", "Automatic"}], 
+         "}"}]}], ",", 
+       RowBox[{"FrameLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<Date\>\"", ",", 
+          RowBox[{"etfs", "[", 
+           RowBox[{"[", "i", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"StringJoin", "[", 
+           RowBox[{"\"\<Confidence of Traders (CoT) and \>\"", ",", 
+            RowBox[{"etfs", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", "\"\< ETF Price\>\""}], 
+           "]"}]}], "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}]}], ";", "\n", 
+    RowBox[{"cbotplot", "=", 
+     RowBox[{"DateListPlot", "[", 
+      RowBox[{"data2", ",", 
+       RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+       RowBox[{"Epilog", "\[Rule]", 
+        RowBox[{"Line", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"data2", "[", 
+              RowBox[{"[", 
+               RowBox[{"1", ",", "1"}], "]"}], "]"}], ",", "0"}], "}"}], ",", 
+           
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"data2", "[", 
+              RowBox[{"[", 
+               RowBox[{
+                RowBox[{"Length", "[", "data2", "]"}], ",", "1"}], "]"}], 
+              "]"}], ",", "0"}], "}"}]}], "}"}], "]"}]}], ",", 
+       RowBox[{"PlotStyle", "\[Rule]", "Red"}], ",", 
+       RowBox[{"ImagePadding", "\[Rule]", "50"}], ",", 
+       RowBox[{"Axes", "\[Rule]", "False"}], ",", 
+       RowBox[{"Frame", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"False", ",", "False", ",", "False", ",", "True"}], "}"}]}], 
+       ",", 
+       RowBox[{"FrameTicks", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"None", ",", "None", ",", "None", ",", "All"}], "}"}]}], ",", 
+       RowBox[{"FrameStyle", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "Automatic", ",", "Automatic", ",", "Automatic", ",", "Red"}], 
+         "}"}]}], ",", 
+       RowBox[{"ImageSize", "\[Rule]", "500"}], ",", 
+       RowBox[{"FrameLabel", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<\>\"", ",", "\"\<\>\"", ",", "\"\<\>\"", ",", "\"\<CoT\>\""}], 
+         "}"}]}]}], "]"}]}], ";", "\n", 
+    RowBox[{"date", "=", 
+     RowBox[{"DateString", "[", 
+      RowBox[{"{", 
+       RowBox[{
+       "\"\<Hour24\>\"", ",", "\"\<Minute\>\"", ",", "\"\<.\>\"", ",", 
+        "\"\<Second\>\"", ",", "\"\<-\>\"", ",", "\"\<MonthShort\>\"", ",", 
+        "\"\<-\>\"", ",", "\"\<Day\>\"", ",", "\"\<-\>\"", ",", 
+        "\"\<Year\>\""}], "}"}], "]"}]}], ";", "\n", 
+    RowBox[{"filename", "=", 
+     RowBox[{"StringJoin", "[", 
+      RowBox[{"\"\</Users/padamson/Mathematica/cot/reports/cot-\>\"", ",", 
+       RowBox[{"etfs", "[", 
+        RowBox[{"[", "i", "]"}], "]"}], ",", "\"\<-\>\"", ",", "date", ",", 
+       "\"\<.pdf\>\""}], "]"}]}], ";", "\n", 
+    RowBox[{"Export", "[", 
+     RowBox[{"filename", ",", 
+      RowBox[{"Overlay", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"etfplot", ",", "cbotplot"}], "}"}], ",", 
+        RowBox[{"ImageSize", "\[Rule]", "500"}]}], "]"}]}], "]"}]}]}], 
+  "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.62748895468461*^9, 3.627488954685679*^9}, {
+  3.627489292308852*^9, 3.6274893354265423`*^9}, {3.627489396848715*^9, 
+  3.6274894812597713`*^9}, {3.6274895499378347`*^9, 3.627489605542659*^9}, {
+  3.6274897317635403`*^9, 3.6274898489083767`*^9}, {3.6274898983639507`*^9, 
+  3.627489898546089*^9}}]
+},
+WindowSize->{1001, 827},
+WindowMargins->{{12, Automatic}, {4, Automatic}},
+FrontEndVersion->"8.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (August 26, \
+2012)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 515, 14, 43, "Input"],
+Cell[1075, 36, 6004, 152, 238, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
