@@ -1,22 +1,22 @@
 datafile=StringJoin[$InitialDirectory,"/scratch/cot.csv"];
 data=Import[datafile,"DateStringFormat"->{"Year","-","Month","-","Day"}];
 data2=Table[{data[[i,2]],100*N[(data[[i,4]]-data[[i,5]])/data[[i,3]]]},{i,Length[data]}];
-usodata=FinancialData["USO",data2[[Length[data2],1]]];
-usoplot=DateListPlot[usodata,
+oildata=FinancialData["NYSE:OIL",data2[[Length[data2],1]]];
+oilplot=DateListPlot[oildata,
   Joined->True, 
   PlotStyle->Blue,
-  ImagePadding->25,
+  ImagePadding->50,
   Frame->{True,True,True,False},
   FrameStyle->{Automatic,Blue,Automatic,Automatic},
-  FrameLabel->{"Date","USO"},
+  FrameLabel->{"Date","OIL","Confidence of Traders (CoT) and OIL ETF Price"},
   ImageSize->500];
 cbotplot=DateListPlot[data2,Joined->True,Epilog->Line[{{data2[[1,1]],0},{data2[[Length[data2],1]],0}}],
-  PlotStyle->Red,ImagePadding->25,
+  PlotStyle->Red,ImagePadding->50,
   Axes->False,Frame->{False,False,False,True},
   FrameTicks->{None,None,None,All},
   FrameStyle->{Automatic,Automatic,Automatic,Red},ImageSize->500,
   FrameLabel->{"","","","CoT"}];
 date=DateString[{"Hour24","Minute",".","Second","-","MonthShort","-","Day","-","Year"}];
 filename=StringJoin[$InitialDirectory,"/reports/cot-",date,".pdf"];
-Export[filename,Overlay[{usoplot,cbotplot},ImageSize->500]];
+Export[filename,Overlay[{oilplot,cbotplot},ImageSize->500]];
 Exit[]
