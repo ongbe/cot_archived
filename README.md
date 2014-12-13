@@ -25,7 +25,8 @@ Run `./cot.bash`. CBOT data will be downloaded to the `scratch` directory (creat
 manipulated for import
 into Mathematica. The bash script will execute a short Mathematica script to generate an overlay of two ListPlots. 
 One plot is of net long positions (longs minus shorts divided by total open interest). The other ListPlot is
-just of the closing price of the iPath S&P GSCI Crude Oil Total Return Index Exchange Traded Fund, ticker OIL.
+just of the closing price of the iPath S&P GSCI Crude Oil Total Return Index Exchange Traded Fund, ticker OIL. 
+Similar plots for wheat, corn, and soybeans are also created, but they seem to be of limited utility.
 
 Output
 ======
