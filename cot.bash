@@ -1,4 +1,5 @@
 #!/bin/bash
+mkdir -p scratch
 cd scratch
 curl http://www.cftc.gov/files/dea/history/fut_disagg_txt_2014.zip > f_2014.zip
 unzip f_2014.zip
@@ -13,5 +14,6 @@ awk -F "," '{OFS=","};{print $1, $3, $8, $22, $23 }' f_sub.csv > f_col.csv
 sed -n '/CRUDE OIL LIGHT SWEET - NEW YORK MERCANTILE EXCHANGE/p' f_col.csv > cot.csv
 rm f_*.csv
 cd ..
+mkdir -p reports
 MathKernel -noprompt -run "<<./cot.m"
 rm scratch/cot.csv

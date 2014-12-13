@@ -21,15 +21,16 @@ script is executable with `chmod u+x cot.bash`.
 Execution
 =========
 
-Run `./cot.bash`. CBOT data will be downloaded to the `scratch` directory and manipulated for import
+Run `./cot.bash`. CBOT data will be downloaded to the `scratch` directory (created if one doesn't exist) and 
+manipulated for import
 into Mathematica. The bash script will execute a short Mathematica script to generate an overlay of two ListPlots. 
 One plot is of net long positions (longs minus shorts divided by total open interest). The other ListPlot is
-just of the closing price of the United States Oil Fund ETF, ticker USO.
+just of the closing price of the iPath S&P GSCI Crude Oil Total Return Index Exchange Traded Fund, ticker OIL.
 
 Output
 ======
 
-A PDF of a plot of generated in the `reports` directory.
+A PDF of a plot generated in the `reports` directory. (The `reports` directory is created if one doesn't exist.
 
 
 
